@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задание №1</title>
+  </head>
+  <body>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Serif&display=swap");
+      div {
+        font-family: "IBM Plex Serif", serif;
+      }
+    </style>
+    <script>
+      function weekDay(size, day, color) {
+        for (let i = 0; i < 7; i++) {
+          document.write(
+            `<div style="color: ${color[i]}; font-size: ${size[i]}em">${day[i]}</div>`
+          );
+        }
+      }
+      let days = [
+        "понедельник",
+        "вторник",
+        "среда",
+        "четверг",
+        "пятница",
+        "суббота",
+        "воскресенье",
+      ];
+      let sizes = [7, 6, 5, 4, 3, 2, 1];
+      let colors = [
+        "black",
+        "grey",
+        "darkblue",
+        "blue",
+        "purple",
+        "hotpink",
+        "red",
+      ];
+      weekDay(sizes, days, colors);
+    </script>
+  </body>
+</html>

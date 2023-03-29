@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задание №3</title>
+  </head>
+  <body>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap");
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      table {
+        margin-top: 50px;
+        margin-left: 50px;
+        border-collapse: collapse;
+        background-color: rgba(210, 210, 217, 70%);
+        color: #313131;
+        border-radius: 0 0 8px 8px;
+        font-family: "Roboto Condensed", sans-serif;
+      }
+      .info {
+        padding: 10px 70px 10px 10px;
+        border-right: 2px solid #a4a4a4;
+      }
+      .values {
+        padding: 10px;
+      }
+      caption {
+        padding: 10px;
+        font-weight: bold;
+        background-color: rgba(210, 210, 217, 70%);
+        border-radius: 8px 8px 0 0;
+        font-size: large;
+      }
+      #info-radians {
+        border-top: 4px solid #a4a4a4;
+        border-bottom: 2px solid #a4a4a4;
+      }
+    </style>
+    <script>
+      function getFuncValue(x, eps, n = -1) {
+        if (n < 0) {
+          n++;
+          return Math.PI / 2 + getFuncValue(x, eps, n);
+        }
+        value = Math.pow(-1, n + 1) / ((2 * n + 1) * Math.pow(x, 2 * n + 1));
+        if (Math.abs(value) <= eps) {
+          return value;
+        } else {
+          n++;
+          return value + getFuncValue(x, eps, n);
+        }
+      }
+
+      let x, numOrNot;
+      do {
+        numOrNot = false;
+        x = prompt(
+          "Введите x (x > 1) для вычисления значения функции arctg x:",
+          ""
+        );
+        try {
+          if (parseFloat(x) <= 1) {
+            numOrNot = true;
+            throw new Error("Необходимо ввести число, большее 1.");
+          }
+          if (isNaN(x)) {
+            numOrNot = true;
+            throw new Error(
+              "Введено нечисловое значение. Необходимо ввести число."
+            );
+          }
+          if (x == "") {
+            numOrNot = true;
+            throw new Error(
+              "Поле ввода не содержит значения. Необходимо ввести число."
+            );
+          }
+          if (x == null) {
+            break;
+          }
+        } catch (error) {
+          alert(error.message);
+        }
+      } while (numOrNot);
+
+      let eps;
+      do {
+        numOrNot = false;
+        eps = prompt("Введите точность:", "");
+        try {
+          if (isNaN(eps)) {
+            numOrNot = true;
+            throw new Error(
+              "Введено нечисловое значение. Необходимо ввести число."
+            );
+          }
+          if (eps == "") {
+            numOrNot = true;
+            throw new Error(
+              "Поле ввода не содержит значения. Необходимо ввести число."
+            );
+          }
+          if (eps == null) {
+            break;
+          }
+        } catch (error) {
+          alert(error.message);
+        }
+      } while (numOrNot);
+
+      if (x == null || eps == null) {
+        document.write("");
+      } else {
+        x = parseFloat(x);
+        eps = parseFloat(eps);
+        let result = getFuncValue(x, eps);
+        let sumInDegrees = (result * 180) / Math.PI;
+        document.write(
+          "<table><caption>Значение функции arctg x</caption><tr id='info-radians'><td class='info'>Радианы</td><td class='values'>",
+          result.toFixed(5),
+          "</td></tr><tr><td class='info'>Градусы</td><td class='values'>",
+          sumInDegrees.toFixed(5),
+          "</td></tr></table>"
+        );
+      }
+    </script>
+  </body>
+</html>
